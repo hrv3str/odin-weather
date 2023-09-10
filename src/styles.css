@@ -1,0 +1,56 @@
+:root {
+    --font-display:'Lobster', cursive;
+    --font-sans-serif:'Roboto Condensed', sans-serif;
+    --col-black: #191919;
+    --col-semi-black: #191919a6;
+    --col-white: #e5e5e5
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background: url(./assets/background.jpg);
+    background-size: ;
+    font-family: var(--font-sans-serif);
+    color: var(--col-white);
+    display: grid;
+    grid-template-rows: 10vh 1fr 5vh;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--col-semi-black);
+    color: var(--col-white);
+    font-family: var(--font-display);
+    height: 10vh;
+    gap: 1rem
+}
+
+.header .title {
+    font-size: 3rem;
+}
+
+.header .logo {
+    background: url(./favicon.svg);
+    background-size: cover;
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 1rem;
+    background-color: var(--col-white);
+    margin-left: 2rem;
+    padding: 0.5rem;
+}
+
+.main {
+}
+
+.footer {
+    background-color: var(--col-semi-black);
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
