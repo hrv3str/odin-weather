@@ -10,11 +10,12 @@ body {
     height: 100vh;
     width: 100vw;
     background: url(./assets/background.jpg);
-    background-size: ;
+    background-size: cover;
     font-family: var(--font-sans-serif);
     color: var(--col-white);
     display: grid;
     grid-template-rows: 10vh 1fr 5vh;
+    font-size: 1.5rem;
 }
 
 .header {
@@ -44,6 +45,115 @@ body {
 }
 
 .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main .card {
+    width: fit-content;
+    max-width: 50vw;
+    height: fit-content;
+    max-height: 30vh;
+    background-color: var(--col-semi-black);
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--col-black);
+    box-shadow: 0 0 3px var(--col-black);
+    display: grid;
+    grid-template-areas:
+        "place place temperature"
+        "country -blank temperature"
+        "date  feelslike feelslike"
+        "humidity chance-of chance-of"
+        "wind-speed blank blank";
+    gap: 0.5rem;
+}
+
+.main .place {
+    grid-area: place;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.main .country {
+    grid-area: country;
+    font-size: 2rem;
+    font-family: var(--font-display);
+}
+
+.main .temperature {
+    grid-area: temperature;
+    font-size: 6rem;
+    font-family: var(--font-display);
+    padding-left: 5rem;
+}
+
+.celsius::after,
+.farenheit::after {
+    font-size: 0.75em;
+    vertical-align: top;
+}
+
+.celsius::after {
+    content: "°C";
+}
+
+.farenheit::after {
+    content: "°F";
+}
+
+.main .date {
+    grid-area: date;
+}
+
+.main .feelslike {
+    grid-area: feelslike;
+    margin-left: auto;
+}
+
+.feelslike::before {
+    content: "Feels like";
+    padding-right: 0.5rem;
+}
+
+.main .humidity {
+    grid-area: humidity;
+}
+
+.humidity::before {
+    content: "Humidity";
+    padding-right: 0.5rem;
+}
+
+.humidity::after,
+.chance-of::after {
+    content: "%";
+    padding-left: 0.05rem;
+}
+
+.main .chance-of {
+    grid-area: chance-of;
+    margin-left: auto;
+}
+
+.rain::before {
+    content: "Chance of Rain";
+    padding-right: 0.5rem;
+}
+
+.main .wind-speed {
+    grid-area: wind-speed;
+}
+
+.wind-speed::before {
+    content: "Wind speed";
+    padding-right: 0.5rem;
+}
+
+.kilometers::after {
+    content: "km/h";
+    padding-left: 0.1rem;
 }
 
 .footer {
