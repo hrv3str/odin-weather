@@ -2,7 +2,7 @@
     --font-display:'Lobster', cursive;
     --font-sans-serif:'Roboto Condensed', sans-serif;
     --col-black: #191919;
-    --col-semi-black: #191919a6;
+    --col-semi-black: #19191988;
     --col-white: #e5e5e5
 }
 
@@ -52,9 +52,9 @@ body {
 
 .main .card {
     width: fit-content;
-    max-width: 50vw;
+    max-width: 40vw;
     height: fit-content;
-    max-height: 30vh;
+    max-height: 60vh;
     background-color: var(--col-semi-black);
     padding: 1rem;
     border-radius: 1rem;
@@ -63,11 +63,79 @@ body {
     display: grid;
     grid-template-areas:
         "place place temperature"
-        "country -blank temperature"
-        "date  feelslike feelslike"
-        "humidity chance-of chance-of"
-        "wind-speed blank blank";
+        "country blank temperature"
+        "date  blank feelslike"
+        "condition blank temp-min"
+        "humidity blank temp-max"
+        "wind-speed wind-speed chance-of"
+        "title title title"
+        "hourly hourly hourly"
+        "hourly hourly hourly";
     gap: 0.5rem;
+}
+
+.card > * {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.feelslike,
+.temp-min,
+.temp-max,
+.chance-of {
+    justify-content: flex-end;
+}
+
+.icon {
+    --side: 1.5rem;
+    opacity: 0.7;
+    display: inline-block;
+    background-size: cover;
+    height: var(--side);
+    width: var(--side);
+    order: -1;
+}
+
+.place .icon {
+    background: url("./assets/map-marker-radius.svg");
+    --side: 3rem;
+    opacity: 1;
+}
+
+.date .icon {
+    background: url("./assets/calendar-range.svg");
+}
+
+.humidity .icon {
+    background: url("./assets/water-percent.svg");
+}
+
+.wind-speed .icon {
+    background: url("./assets/weather-windy.svg");
+}
+
+.condition .icon {
+    background: url("//cdn.weatherapi.com/weather/64x64/night/116.png");
+    filter: grayscale();
+    background-position-x: 10%;
+}
+
+.feelslike .icon {
+    background: url("./assets/thermometer.svg");
+}
+
+.temp-min .icon {
+    background: url("./assets/thermometer-chevron-down.svg");
+}
+
+.temp-max .icon {
+    background: url("./assets/thermometer-chevron-up.svg");
+}
+
+.rain .icon {
+    background: url("./assets/weather-pouring.svg");
 }
 
 .main .place {
@@ -80,19 +148,139 @@ body {
     grid-area: country;
     font-size: 2rem;
     font-family: var(--font-display);
+    padding-left: 4rem;
+    position: relative;
+    top: -40%;
+    left: -5%;
+}
+
+.main .condition {
+    grid-area: condition;
 }
 
 .main .temperature {
     grid-area: temperature;
     font-size: 6rem;
     font-family: var(--font-display);
-    padding-left: 5rem;
+    margin-left: auto;
+}
+
+.main .date {
+    grid-area: date;
+}
+
+.main .feelslike {
+    grid-area: feelslike;
+}
+
+.feelslike::before {
+    content: "Feels like";
+}
+
+.main .humidity {
+    grid-area: humidity;
+}
+
+.humidity::before {
+    content: "Humidity";
+}
+
+.humidity::after,
+.chance-of::after {
+    content: "%";
+    position: relative;
+    right: 3%;
+}
+
+.main .chance-of {
+    grid-area: chance-of;
+}
+
+.main .wind-speed {
+    grid-area: wind-speed;
+}
+
+.wind-speed::before {
+    content: "Wind speed";
+}
+
+.main .temp-max {
+    grid-area: temp-max;
+}
+
+.main .temp-min {
+    grid-area: temp-min;
+}
+
+.temp-max::before {
+    content: "Max";
+}
+
+.temp-min::before {
+    content: "Min";
+}
+
+.main .hourly {
+    grid-area: hourly;
+    height: fit-content;
+    width: 100%;
+    overflow-x: scroll;
+    display: block;
+}
+
+.main .title {
+    grid-area: title;
+    font-family: var(--font-display);
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.hourly .scroll {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    gap: 0.5rem;
+}
+
+.scroll .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    border-radius: 0.5rem;
+}
+
+.scroll .temperature {
+    padding: 0;
+    font-size: 2rem;
+    font-family: var(--font-sans-serif);
+}
+
+.scroll .icon {
+    --side: 4rem;
+}
+
+.night {
+    background: url("./assets/weather-night.svg");
+}
+
+.sunrise {
+    background: url("./assets/weather-sunset-up.svg");
+}
+
+.day {
+    background: url("./assets/weather-sunny.svg");
+}
+
+.kilometers::after {
+    content: "km/h";
 }
 
 .celsius::after,
 .farenheit::after {
-    font-size: 0.75em;
-    vertical-align: top;
+    font-size: 60%;
+    position: relative;
+    right: 3%;
+    align-self: flex-start;
 }
 
 .celsius::after {
@@ -103,57 +291,12 @@ body {
     content: "°F";
 }
 
-.main .date {
-    grid-area: date;
-}
-
-.main .feelslike {
-    grid-area: feelslike;
-    margin-left: auto;
-}
-
-.feelslike::before {
-    content: "Feels like";
-    padding-right: 0.5rem;
-}
-
-.main .humidity {
-    grid-area: humidity;
-}
-
-.humidity::before {
-    content: "Humidity";
-    padding-right: 0.5rem;
-}
-
-.humidity::after,
-.chance-of::after {
-    content: "%";
-    padding-left: 0.05rem;
-}
-
-.main .chance-of {
-    grid-area: chance-of;
-    margin-left: auto;
-}
-
 .rain::before {
     content: "Chance of Rain";
-    padding-right: 0.5rem;
 }
 
-.main .wind-speed {
-    grid-area: wind-speed;
-}
-
-.wind-speed::before {
-    content: "Wind speed";
-    padding-right: 0.5rem;
-}
-
-.kilometers::after {
-    content: "km/h";
-    padding-left: 0.1rem;
+.snow::before {
+    content: "Chance of Snow";
 }
 
 .footer {
