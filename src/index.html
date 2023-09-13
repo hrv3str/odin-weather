@@ -7,6 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <style id="condition-icon">
+        .condition .icon {
+            background: url("//cdn.weatherapi.com/weather/64x64/night/116.png");
+        }
+    </style>
 </head>
 <body>
     <div class="header">
@@ -14,11 +19,29 @@
         <div class="title">
             Petrel Weather
         </div>
+        <div class="unit switch">
+            <input type="radio"
+                id="metric"
+                name="units"
+                value="metric"
+                checked>
+            <label for="metric">C&deg;</label>
+            <input type="radio"
+                id="imperial"
+                name="units"
+                value="imperial">
+            <label for="imperial">F&deg;</label>
+        </div>
     </div>
     <div class="main">
         <div class="card">
-            <div class="place"><span class="icon"></span>Kushuhum</div>
-            <div class="country">Ukrane</div>
+            <div class="place">
+                <button class="icon"
+                    title="Choose your location">
+                </button>
+                New York
+            </div>
+            <div class="country">United States of America</div>
             <div class="temperature celsius">25</div>
             <div class="date"><span class="icon"></span>11 Sept 2023</div>
             <div class="condition"><span class="icon"></span>Partly cloudy</div>
@@ -71,30 +94,94 @@
                         <div class="icon day"></div>
                         <div class="temperature celsius">22.2</div>
                     </div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
-                    <div class="card"></div>
+                    <div class="card">
+                        <div class="time">08:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">09:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">10:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">11:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">12:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">13:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">14:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">15:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">16:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">17:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">18:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">19:00</div>
+                        <div class="icon day"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">20:00</div>
+                        <div class="icon sunset"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">21:00</div>
+                        <div class="icon night"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">22:00</div>
+                        <div class="icon night"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
+                    <div class="card">
+                        <div class="time">23:00</div>
+                        <div class="icon night"></div>
+                        <div class="temperature celsius">22.2</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="footer">
-        <div>
-            2023 Coded by hrv3str ||<a href="">
-                <span class="logo"></span>
+        <div class="title">
+            2023 Coded by hrv3str ||<a target="_blank" href="https://github.com/hrv3str">
+                <span class="icon logo"></span>
             </a>
         </div>
     </div>

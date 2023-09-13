@@ -3,7 +3,8 @@
     --font-sans-serif:'Roboto Condensed', sans-serif;
     --col-black: #191919;
     --col-semi-black: #19191988;
-    --col-white: #e5e5e5
+    --col-white: #e5e5e5;
+    --card-width: 5rem;
 }
 
 body {
@@ -16,6 +17,20 @@ body {
     display: grid;
     grid-template-rows: 10vh 1fr 5vh;
     font-size: 1.5rem;
+    overflow: hidden;
+}
+
+button {
+    border: none;
+    padding: none;
+    outline: none;
+    transform: scale(1);
+    transition: transform 100ms ease-out;
+}
+
+button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .header {
@@ -26,7 +41,8 @@ body {
     color: var(--col-white);
     font-family: var(--font-display);
     height: 10vh;
-    gap: 1rem
+    gap: 1rem;
+    border-bottom: 1px solid var(--col-black);
 }
 
 .header .title {
@@ -44,6 +60,63 @@ body {
     padding: 0.5rem;
 }
 
+.header .switch {
+    margin-left: auto;
+    margin-right: 2rem;
+    height: fit-content;
+    width: fit-content;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    font-size: 1.5rem;
+    font-family: var(--font-sans-serif);
+    font-weight: 600;
+    padding: 0.5rem 0rem;
+    opacity: 0.7;
+    text-shadow: 0 0 0 var(--col-black);
+    transition: opacity 200ms ease-in;
+    transition: text-shadow 200ms ease-in;
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+label[for="metric"]::after,
+label[for="imperial"]::before {
+    content: "|";
+    font-size: 1.8rem;
+}
+
+
+label[for="metric"]::after {
+    padding-left: 0.1rem;
+}
+
+label[for="imperial"]::before {
+    padding-right: 0.5rem;
+}
+
+input[type="text"] {
+    width: calc(var(--card-width) * 4);
+    background-color: transparent;
+    color: var(--col-white);
+    border: none;
+    outline: none;
+    border-bottom: 3px solid var(--col-semi-black);
+    font-size: 2.5rem;
+    font-family: var(--font-sans-serif);
+}
+
+input[type="radio"]:checked + label {
+    opacity: 1;
+    text-shadow: 0 0 3px var(--col-black);
+}
+
 .main {
     display: flex;
     justify-content: center;
@@ -52,9 +125,7 @@ body {
 
 .main .card {
     width: fit-content;
-    max-width: 40vw;
     height: fit-content;
-    max-height: 60vh;
     background-color: var(--col-semi-black);
     padding: 1rem;
     border-radius: 1rem;
@@ -117,8 +188,8 @@ body {
 }
 
 .condition .icon {
-    background: url("//cdn.weatherapi.com/weather/64x64/night/116.png");
     filter: grayscale();
+    background-size: contain;
     background-position-x: 10%;
 }
 
@@ -136,6 +207,10 @@ body {
 
 .rain .icon {
     background: url("./assets/weather-pouring.svg");
+}
+
+.snow .icon {
+    background: url("./assets/snowflake.svg");
 }
 
 .main .place {
@@ -223,7 +298,7 @@ body {
 .main .hourly {
     grid-area: hourly;
     height: fit-content;
-    width: 100%;
+    width: calc(var(--card-width) * 9 + 5px);
     overflow-x: scroll;
     display: block;
 }
@@ -242,11 +317,13 @@ body {
 }
 
 .scroll .card {
+    width: var(--card-width);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
     border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .scroll .temperature {
@@ -259,6 +336,37 @@ body {
     --side: 4rem;
 }
 
+::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--col-semi-black);
+    border-radius: 0.5rem;
+    border: 1px solid var(--col-black);
+    box-shadow: 0 0 3px var(--col-black);
+}
+
+.footer {
+    border-top: 1px solid var(--col-black);
+}
+
+.footer .title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.footer .logo {
+    background: url("./assets/github.svg");
+    margin-top: 7%;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
 .night {
     background: url("./assets/weather-night.svg");
 }
@@ -269,6 +377,10 @@ body {
 
 .day {
     background: url("./assets/weather-sunny.svg");
+}
+
+.sunset {
+    background: url("./assets/weather-sunset-down.svg");
 }
 
 .kilometers::after {
@@ -306,4 +418,101 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .main .hourly {
+        width: calc(var(--card-width) * 7 + 3rem - 5px);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    :root {
+        --card-width: 3.5rem;
+        --col-semi-black: #1919199f;
+    }
+
+    body {
+        height: 100vh;
+        width: 100vw;
+        background: url("./assets/bg_mobile.jpg");
+        grid-template-rows: 10vh 1fr 5vh;
+        font-size: 1.3rem;
+    }
+
+    .icon {
+        --side: 1.2rem;
+        opacity: 1;
+    }
+    
+    .header .title {
+        font-size: 2rem;
+    }
+    
+    .header .logo {
+        height: 2.5rem;
+        width: 2.5rem;
+        margin-left: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .header .switch {
+        margin-right: 0.5rem;
+    }
+
+    label {
+        font-size: 1.3rem;
+    }
+
+    label[for="metric"]::after,
+    label[for="imperial"]::before {
+    font-size: 1.5rem;
+    }
+    
+    .main .card {
+        grid-template-areas:
+            "place temperature"
+            "country temperature"
+            "date date"
+            "condition temp-min"
+            "humidity temp-max"
+            "feelslike feelslike"
+            "wind-speed wind-speed"
+            "chance-of chance-of"
+            "title title"
+            "hourly hourly"
+            "hourly hourly";
+    }
+
+    .feelslike,
+    .chance-of {
+        justify-content: flex-start;
+    }
+
+    .main .place {
+        font-size: 2rem;
+    }
+
+    .main .country {
+        font-size: 1rem;
+        top: -100%;
+        left: -3%;
+    }
+
+    .main .temperature {
+        font-size: 3.5rem;
+    }
+
+    .main .hourly {
+        margin: 0 auto;
+        width: calc(var(--card-width) * 5 + 1rem - 4px);
+    }
+
+    .scroll .temperature {
+        font-size: 1.3rem;
+    }
+    
+    .scroll .icon {
+        --side: 2rem;
+    }
 }
