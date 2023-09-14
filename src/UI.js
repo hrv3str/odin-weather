@@ -39,168 +39,168 @@ const display = (() => {
         },
         hourly: {
             0: {
-                type: night,
+                type: 'night',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             1: {
-                type: night,
+                type: 'night',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             2: {
-                type: night,
+                type: 'night',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             3: {
-                type: night,
+                type: 'night',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             4: {
-                type: night,
+                type: 'night',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             5: {
-                type: sunrise,
+                type: 'sunrise',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             6: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             7: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             8: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             9: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             10: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             11: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             12: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             13: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             14: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             15: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             16: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             17: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             18: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             19: {
-                type: day,
+                type: 'day',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             20: {
-                type: sunset,
+                type: 'sunset',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             21: {
-                type: night,
+                type: 'night',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             22: {
-                type: night,
+                type: 'night',
                 temperature: {
                     c: 0,
                     f: 0,
                 }, 
             },
             23: {
-                type: night,
+                type: 'night',
                 temperature: {
                     c: 0,
                     f: 0,
