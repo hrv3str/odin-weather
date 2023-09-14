@@ -1,217 +1,12 @@
 const display = (() => {
     //Tempalte object that must be passed to module
-    let source = {
-        place: '',
-        country: '',
-        date: '',
-        condition: {
-            text: '',
-            iconSRC: ''
-        },
-        temperature: {
-            c: 0,
-            f: 0,
-            maxTemp: {
-                c: 0,
-                f: 0,
-            },
-            minTemp: {
-                c: 0,
-                f: 0
-            },
-            feelsLike: {
-                c: 0,
-                f: 0
-            },
-        },
-        humidity: 0,
-        windSpeed: {
-            km: 0,
-            mph: 0,
-        },
-        chanceOf: {
-            snow: 0,
-            rain: 0,
-        },
-        units: {
-            metric: true,
-            imperial: false,
-        },
-        hourly: {
-            0: {
-                type: 'night',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            1: {
-                type: 'night',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            2: {
-                type: 'night',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            3: {
-                type: 'night',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            4: {
-                type: 'night',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            5: {
-                type: 'sunrise',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            6: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            7: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            8: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            9: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            10: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            11: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            12: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            13: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            14: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            15: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            16: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            17: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            18: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            19: {
-                type: 'day',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            20: {
-                type: 'sunset',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            21: {
-                type: 'night',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            22: {
-                type: 'night',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-            23: {
-                type: 'night',
-                temperature: {
-                    c: 0,
-                    f: 0,
-                }, 
-            },
-        },
-    }
+    let source = {}
 
     // Sets passed object as source object
     const getData = (object) => {
         source = {...object};
+        console.log('display.getData - Read object');
+        console.log(source);
     }
 
     // Refreshes UI according to 'source' object
@@ -276,6 +71,8 @@ const display = (() => {
 
         // Toggle wind speed units according to source.units value
         const toggleWindSpeedUnits = (target) => {
+            console.log(`Wind speed toggle is aimed ${target}`);
+            console.log(target.classList)
             if (source.units.metric) {
                 if (target.classList.contains('miles')) {
                     target.classList.remove('miles');
@@ -408,7 +205,9 @@ const display = (() => {
 
                 const bodyContent = `
                     <div class="time">${key}:00</div>
-                    <div class="icon ${key.type}"></div>
+                    <img class="icon"
+                        src="${key.iconSRC}"
+                        alt="${key.condition}"/>
                 `;
                 body.innerHTML = bodyContent;
 
@@ -416,7 +215,7 @@ const display = (() => {
                 temperature.classList.add('temperature');
                 toggleTemperatureUnits(temperature);
 
-                const sourceTemp = key.temperature;
+                const sourceTemp = source.hourly[key].temperature;
                 const text = toggleTemperatureValues(sourceTemp);
                 temperature.textContent = text;
 
