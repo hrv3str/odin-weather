@@ -4,7 +4,7 @@ const weather = (() => {
         const string = input;
 
         const validate = async (input) => {
-            const geoAPICall = `http://api.geonames.org/searchJSON?q=${encodeURIComponent(input)}&maxRows=10&username=novikadze`;
+            const geoAPICall = `https://api.geonames.org/searchJSON?q=${encodeURIComponent(input)}&maxRows=10&username=novikadze`;
             const response = await fetch(geoAPICall,  {
                 mode: 'cors'
             });
