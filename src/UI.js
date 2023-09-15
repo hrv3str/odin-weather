@@ -2,6 +2,13 @@ const display = (() => {
     //Tempalte object that must be passed to module
     let source = {}
 
+    // stores strings and input state
+    let buffer = {
+        location: '',
+        country: '',
+        isShown: false,
+    }
+
     // Sets passed object as source object
     const getData = (object) => {
         source = {...object};
@@ -103,7 +110,6 @@ const display = (() => {
         // Toggle wind speed units according to source.units value
         const toggleWindSpeedUnits = (target) => {
             const element = document.querySelector(target);
-            console.log(target.classList)
             if (source.units.metric) {
                 if (element.classList.contains('miles')) {
                     element.classList.remove('miles');
@@ -247,6 +253,7 @@ const display = (() => {
                         title="${source.hourly[key].condition}"/>
                 `;
                 body.innerHTML = bodyContent;
+                body.id = `Card #${key}`;
 
                 const temperature = document.createElement('div');
                 temperature.classList.add('temperature');
@@ -262,8 +269,15 @@ const display = (() => {
             console.log('hourly forecast updated');
         }
 
+        const scrollCard = () => {
+            const currentHour = new Date().getHours();
+            const focus = document.getElementById(`Card #${currentHour}`);
+            focus.scrollIntoView({ behavior: 'smooth' });
+        }
+
         // Call the functions to update the content
         hourly();
+        scrollCard();
         windSpeed();
         chanceOf();
         humidity();
@@ -280,25 +294,31 @@ const display = (() => {
 
     // Handles location input display
     const toggleInput = () => {
-        // stores strings and input state
-        let buffer = {
-            location: '',
-            country: '',
-            isShown: false,
-        }
 
         const locationInput = document.createElement('input');
         locationInput.type = 'text';
+        const submitButton = document.createElement('button');
+        const cancelButton = document.createElement('button');
+        submitButton.classList.add('icon');
+        submitButton.classList.add('submit');
+        submitButton.title = 'Submit your location'
+        cancelButton.classList.add('icon');
+        cancelButton.classList.add('cancel');
+        cancelButton.title = 'Cancel';
+
 
         const locationDiv = document.querySelector('div.place');
         const countryDiv = document.querySelector('div.country');
 
-        if (!buffer.isShown) {
+        if (buffer.isShown === false) {
             buffer.location = '';
             const locationString = locationDiv.textContent;
             buffer.location = locationString;
             locationDiv.textContent = '';
             locationDiv.appendChild(locationInput);
+            locationInput.focus();
+            locationDiv.appendChild(cancelButton);
+            locationDiv.appendChild(submitButton);
 
             buffer.country = ''
             const countryString = countryDiv.textContent;
@@ -307,13 +327,18 @@ const display = (() => {
 
             buffer.isShown = true;
             console.log('Input is shown');
+            return;
         }
 
-        if (buffer.isShown) {
+        if (buffer.isShown === true) {
             const locationString = buffer.location;
             buffer.location = '';
-            locationDiv.removeChild(locationInput);
+            locationDiv.innerHTML = '';
             locationDiv.textContent = locationString;
+            const button = document.createElement('button');
+            button.classList.add('icon');
+            button.title = "Choose your location"
+            locationDiv.appendChild(button);
 
             const countryString = buffer.country;
             buffer.country = '';
@@ -321,6 +346,7 @@ const display = (() => {
 
             buffer.isShown = false;
             console.log('Input is hidden');
+            return;
         }
     }
 
