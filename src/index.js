@@ -283,12 +283,12 @@ const processForecast = () => {
         output.condition.iconSRC = input.current.condition.icon;
         output.temperature.c = input.current.temp_c;
         output.temperature.f = input.current.temp_f;
-        output.temperature.maxTemp.c = input.forecast.forecastday[0].maxtemp_c;
-        output.temperature.maxTemp.f = input.forecast.forecastday[0].maxtemp_f;
-        output.temperature.minTemp.c = input.forecast.forecastday[0].mintemp_c;
-        output.temperature.minTemp.f = input.forecast.forecastday[0].mintemp_f;
+        output.temperature.maxTemp.c = input.forecast.forecastday[0].day.maxtemp_c;
+        output.temperature.maxTemp.f = input.forecast.forecastday[0].day.maxtemp_f;
+        output.temperature.minTemp.c = input.forecast.forecastday[0].day.mintemp_c;
+        output.temperature.minTemp.f = input.forecast.forecastday[0].day.mintemp_f;
         output.temperature.feelsLike.c = input.current.feelslike_c;
-        output.temperature.feelsLike.f = input.current.feelsLike_f;
+        output.temperature.feelsLike.f = input.current.feelslike_f;
         output.humidity = input.current.humidity;
         output.windSpeed.km = input.current.wind_kph;
         output.windSpeed.mph = input.current.wind_mph;

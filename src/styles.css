@@ -187,7 +187,8 @@ input[type="radio"]:checked + label {
     background: url("./assets/weather-windy.svg");
 }
 
-.condition .icon {
+.condition .icon,
+.scroll .icon {
     filter: grayscale();
     background-size: contain;
     background-position-x: 10%;
@@ -211,6 +212,10 @@ input[type="radio"]:checked + label {
 
 .snow .icon {
     background: url("./assets/snowflake.svg");
+}
+
+.no-fallout .icon {
+    background: url("./assets/weather-sunny.svg");
 }
 
 .main .place {
@@ -261,7 +266,8 @@ input[type="radio"]:checked + label {
 }
 
 .humidity::after,
-.chance-of::after {
+.rain::after,
+.snow::after {
     content: "%";
     position: relative;
     right: 3%;
@@ -413,6 +419,10 @@ input[type="radio"]:checked + label {
 
 .snow::before {
     content: "Chance of Snow";
+}
+
+.no-fallout::before {
+    content: "No fallout expected";
 }
 
 .footer {

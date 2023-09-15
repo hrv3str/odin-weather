@@ -15,9 +15,26 @@ const display = (() => {
         // Looks for element and sets its text content
         const set = (target, content) => {
             const input = document.querySelector(target);
-            if (input) {
-                input.textContent = content;
-            }
+            input.textContent = content;
+
+            const icon = document.createElement('span');
+            icon.classList.add("icon");
+            input.appendChild(icon);
+        };
+
+        const setNoIcon = (target, content) => {
+            const input = document.querySelector(target);
+            input.textContent = content;
+        };
+
+        const setPlace = (target, content) => {
+            const input = document.querySelector(target);
+            input.textContent = content;
+
+            const button = document.createElement('button');
+            button.classList.add("icon");
+            button.title = 'Choose your location'
+            input.appendChild(button);
         };
         
         // Takes HTML elements and modifies its classList according to source.units
@@ -52,40 +69,54 @@ const display = (() => {
 
         // Toggle fallout type according to source object and return its value
         const toggleTypeOfFallout = (target) => {
-            if (source.chanceOf.rain != 0) {
+            if (source.chanceOf.rain > 0) {
                 if (target.classList.contains('snow')) {
                     target.classList.remove('snow');
+                }
+                if (target.classList.contains('no-fallout')) {
+                    target.classList.remove('no-fallout');
                 }
                 target.classList.add('rain');
                 return source.chanceOf.rain;
             }
 
-            if (source.chanceOf.snow != 0) {
+            if (source.chanceOf.snow > 0) {
                 if (target.classList.contains('rain')) {
                     target.classList.remove('rain');
+                }
+                if (target.classList.contains('no-fallout')) {
+                    target.classList.remove('no-fallout');
                 }
                 target.classList.add('snow');
                 return source.chanceOf.snow;
             }
+
+            if (target.classList.contains('snow')) {
+                target.classList.remove('snow');
+            }
+            if (target.classList.contains('rain')) {
+                target.classList.remove('rain');
+            }
+            target.classList.add('no-fallout');
         }
 
         // Toggle wind speed units according to source.units value
         const toggleWindSpeedUnits = (target) => {
-            console.log(`Wind speed toggle is aimed ${target}`);
+            const element = document.querySelector(target);
             console.log(target.classList)
             if (source.units.metric) {
-                if (target.classList.contains('miles')) {
-                    target.classList.remove('miles');
+                if (element.classList.contains('miles')) {
+                    element.classList.remove('miles');
                 }
-                target.classList.add('kilometers');
+                element.classList.add('kilometers');
                 return source.windSpeed.km;
             }
 
             if (source.units.imperial) {
-                if (target.classList.contains('kilometers')) {
-                    target.classList.remove('kilometers');
+                if (element.classList.contains('kilometers')) {
+                    element.classList.remove('kilometers');
                 }
-                target.classList.add('miles');
+                element.classList.add('miles');
                 return source.windSpeed.mph;
             }
         }
@@ -94,7 +125,7 @@ const display = (() => {
         const place = () => {
           const target = 'div.place';
           const text = source.place;
-          set(target, text);
+          setPlace(target, text);
           console.log('location display updated');
         };
         
@@ -102,17 +133,18 @@ const display = (() => {
         const country = () => {
           const target = 'div.country';
           const text = source.country;
-          set(target, text);
+          setNoIcon(target, text);
           console.log('country display updated');
         };
         
         // Updates temperature info
         const temperature = () => {
           const target = '.card .temperature';
-          toggleTemperatureUnits(target);
+          const element = document.querySelector(target);
+          toggleTemperatureUnits(element);
           const sourceTemp = source.temperature;
           const text = toggleTemperatureValues(sourceTemp);
-          set(target, text);console.log('temperature display updated');
+          setNoIcon(target, text);console.log('temperature display updated');
         };
 
         // Updates date info
@@ -139,7 +171,8 @@ const display = (() => {
         // Updates feels like info
         const feelsLike = () => {
             const target = 'div.feelslike';
-            toggleTemperatureUnits(target);
+            const element = document.querySelector(target);
+            toggleTemperatureUnits(element);
             const sourceTemp = source.temperature.feelsLike;
             const text = toggleTemperatureValues(sourceTemp);
             set(target, text);
@@ -149,7 +182,8 @@ const display = (() => {
         // Updates max temperature info
         const tempMax = () => {
             const target = 'div.temp-max';
-            toggleTemperatureUnits(target);
+            const element = document.querySelector(target);
+            toggleTemperatureUnits(element);
             const sourceTemp = source.temperature.maxTemp;
             const text = toggleTemperatureValues(sourceTemp);
             set(target, text);
@@ -159,7 +193,8 @@ const display = (() => {
         // Updates min tempreture info
         const tempMin = () => {
             const target = 'div.temp-min';
-            toggleTemperatureUnits(target);
+            const element = document.querySelector(target);
+            toggleTemperatureUnits(element);
             const sourceTemp = source.temperature.minTemp;
             const text = toggleTemperatureValues(sourceTemp);
             set(target, text);
@@ -177,7 +212,8 @@ const display = (() => {
         // Update chance of fallout and its type
         const chanceOf = () => {
             const target = 'div.chance-of';
-            const text = toggleTypeOfFallout(target);
+            const element = document.querySelector(target);
+            const text = toggleTypeOfFallout(element);
             set(target, text);
             console.log('chance of fallout display updated');
         }
@@ -206,8 +242,9 @@ const display = (() => {
                 const bodyContent = `
                     <div class="time">${key}:00</div>
                     <img class="icon"
-                        src="${key.iconSRC}"
-                        alt="${key.condition}"/>
+                        src="${source.hourly[key].iconSRC}"
+                        alt="${source.hourly[key].condition}"
+                        title="${source.hourly[key].condition}"/>
                 `;
                 body.innerHTML = bodyContent;
 
