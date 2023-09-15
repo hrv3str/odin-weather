@@ -5,10 +5,11 @@ import display from './UI.js';
 
 let buffer = {
     processsedForecast: {},
+    location: '',
 }
 
 // Gets forecast object from the weather module and processes it for UI module
-const processForecast = () => {
+const processForecast = async (location) => {
     const getDate = () => {
         const months = [
           'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -273,9 +274,12 @@ const processForecast = () => {
         },
     }
 
-    weather.get().then((result) => {
+    await weather.get(location).then((result) => {
         input = {...result};
-        console.log(input);
+        if (!input.location) {
+            setLocation();
+            return
+        }
         output.place = input.location.name;
         output.country = input.location.country;
         output.date = getDate();
@@ -312,16 +316,83 @@ const processForecast = () => {
 
         buffer.processsedForecast = {};
         buffer.processsedForecast = {...output};
-        console.log(`Forecast translated`);
-        console.log(buffer.processsedForecast);
+        buffer.location = '';
+        buffer.location = output.place;
         display.getData(buffer.processsedForecast);
         display.refresh();
+        listenButton();
+    }).catch((error) => {
+        console.error(error);
     });
+}
+
+const listenButton = () => {
+    const button = document.querySelector('button[title="Choose your location"]');
+    button.addEventListener('click', setLocation);
+}
+
+const unlistenButton = () => {
+    const button = document.querySelector('button[title="Choose your location"]');
+    button.removeEventListener('click', setLocation);
+}
+
+const setLocation = async (e) => {
+    const handleKeyboard = (event) => {
+        if (event.key === 'Escape') {
+            cancelInput();
+            return
+        }
+        if (event.key === 'Enter') {
+            submitInput();
+            return;
+        }
+        return;
+    }
+
+    const listenKeyboard = () => {
+        document.addEventListener('keydown', handleKeyboard);
+    }
+    
+    const unListenKeyboard = () => {
+        document.removeEventListener('keydown', handleKeyboard);
+    }
+
+    const cancelInput = () => {
+        removeEventListener('click', cancelInput);
+        unListenKeyboard();
+        display.toggleInput();
+        listenButton();
+    }
+
+    const submitInput = async () => {
+        submitButton.removeEventListener('click', submitInput);
+        unListenKeyboard();
+        const input = document.querySelector('input[type="text"]');
+        const location = input.value;
+        display.toggleInput();
+        processForecast(location);
+    }
+
+    unlistenButton();
+    listenKeyboard();
+    display.toggleInput();
+
+    const cancelButton = document.querySelector('button.cancel');
+    cancelButton.addEventListener('click', cancelInput);
+    const submitButton = document.querySelector('button.submit');
+    submitButton.addEventListener('click', submitInput);
+}
+
+const unitSwitch = document.querySelector('div.unit');
+
+const handleUnits = () => {
+    processForecast(buffer.location);
 }
 
 const onload = () => {
     removeEventListener('DOMContentLoaded', onload);
-    processForecast()
+    processForecast('kushugum')
+    unitSwitch.addEventListener('click', handleUnits);
     console.log("Page loaded");
 }
 
