@@ -175,6 +175,23 @@ input[type="radio"]:checked + label {
     opacity: 1;
 }
 
+.place .cancel,
+.place .submit {
+    opacity: 0.8;
+    --side: 2.5rem;
+}
+
+.place .cancel {
+    background: url("./assets/cancel.svg");
+    order: 3;
+}
+
+.place .submit {
+    background: url("./assets/keyboard-return.svg");
+    order: 2;
+    margin-top: auto;
+}
+
 .date .icon {
     background: url("./assets/calendar-range.svg");
 }
@@ -454,6 +471,11 @@ input[type="radio"]:checked + label {
         font-size: 1.3rem;
     }
 
+    input[type="text"] {
+        width: calc(var(--card-width) * 1.5);
+        font-size: 2rem;
+    }
+
     .icon {
         --side: 1.2rem;
         opacity: 1;
@@ -496,11 +518,17 @@ input[type="radio"]:checked + label {
             "title title"
             "hourly hourly"
             "hourly hourly";
+        gap: 0.2rem;
     }
 
     .feelslike,
     .chance-of {
         justify-content: flex-start;
+    }
+
+    .place .cancel,
+    .place .submit {
+        --side: 1.5rem;
     }
 
     .main .place {
@@ -509,8 +537,8 @@ input[type="radio"]:checked + label {
 
     .main .country {
         font-size: 1rem;
-        top: -100%;
-        left: -3%;
+        position: initial;
+        padding-left: 0;
     }
 
     .main .temperature {
