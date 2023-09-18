@@ -281,11 +281,12 @@ const processForecast = async (location) => {
             return
         }
 
-        if(input.location.name === 'Dnipropetrovsk') {
+        if(input.location.name === 'Dnipropetrovsk') { //Weather API uses russian language based name for this city, fuck russians!
             output.place = 'Dnipro';
         } else {
             output.place = input.location.name;
         }
+
         output.country = input.location.country;
         output.date = getDate();
         output.condition.text = input.current.condition.text;
