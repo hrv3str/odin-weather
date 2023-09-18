@@ -277,6 +277,7 @@ const processForecast = async (location) => {
     await weather.get(location).then((result) => {
         input = {...result};
         if (!input.location) {
+            alert('Cannot find the location');
             setLocation();
             return
         }
@@ -328,7 +329,8 @@ const processForecast = async (location) => {
         display.refresh();
         listenButton();
     }).catch((error) => {
-        console.error(error);
+        alert('Cannot find the location');
+        setLocation();
     });
 }
 
