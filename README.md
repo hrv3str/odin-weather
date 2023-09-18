@@ -43,4 +43,4 @@ Petrel Weather is a web application that allows users to check the current weath
 
 - Background photo by [Adam Jang](https://unsplash.com/@adamjang?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/MLKrf51NV8w?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
 
-- Unit switch photo by [Tamas Kolossa](https://unsplash.com/@kolossaphoto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/_D3m-lKDOSw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
+- Background photo by [Tamas Kolossa](https://unsplash.com/@kolossaphoto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/_D3m-lKDOSw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
