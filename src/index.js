@@ -280,7 +280,12 @@ const processForecast = async (location) => {
             setLocation();
             return
         }
-        output.place = input.location.name;
+
+        if(input.location.name === 'Dnipropetrovsk') {
+            output.place = 'Dnipro';
+        } else {
+            output.place = input.location.name;
+        }
         output.country = input.location.country;
         output.date = getDate();
         output.condition.text = input.current.condition.text;

@@ -1,29 +1,49 @@
 const weather = (() => {
-    let location = '' //Stores the location
+    let location = {
+        place: '',
+        country: '',
+    } //Stores the location
+
     const get = async (input) => { //Fetches weather data from weather API
         const string = input;
 
         const validate = async (input) => {
-            const geoAPICall = `https://api.geonames.org/searchJSON?q=${encodeURIComponent(input)}&maxRows=10&username=novikadze`;
-            const response = await fetch(geoAPICall,  {
+            const formattedInput = input.trim().replace((/ /g, '+'))
+            const osmAPICall = `https://nominatim.openstreetmap.org/search?q=${formattedInput}&format=json`;
+            const response = await fetch(osmAPICall,  {
                 mode: 'cors'
             });
 
             if (response.ok) {
                 const data = await response.json();
                 console.log('weather.locate - got validation data');
-                if (data.geonames.length <= 0) { // Returns 'location_error' if cannot find the location
+
+                if (data.length <= 0) {
                     return 'location_error';
+                } else if (data.length > 1) {
+                    for (const place of data) {
+                        if (place.class === 'place') {
+                            const index = data.indexOf(place);
+                            console.log(`weather.locate - validated location name is (from pack) ${data[index].name}`);
+                            console.log(data);
+                            return data[index].name;
+                        }
+                    }
                 } else {
-                    console.log(`weather.locate - validated location name is ${data.geonames[0].name}`);
-                    return data.geonames[0].name;
-                };
+                    console.log(data);
+                    console.log(`weather.locate - validated location name is ${data[0].name}`);
+                    return data[0].name;
+                }
             } else {
-                console.error('GeoNames response is not OK!')
+                console.error(`OSM response is not OK! Status: ${response.status}`);
             }
         }
 
         await validate(string).then((result) => {
+            if (result === 'Dnipro') {
+                result = 'Dnipropetrovsk';
+            }
+
             location = result.toLowerCase()
                 .trim()
                 .replace(/\s+/g,'_');
